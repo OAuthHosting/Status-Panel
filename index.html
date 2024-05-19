@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OauthHost-Status</title>
+  <title>Oauth•Hosting</title>
+  <meta name="description" content="Free OAuth Bot Hosting">
+  <link rel="icon" type="image/jpeg" href="favicon.jpg">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-image: url('your-background-image-url.jpg');
-      background-size: cover;
-      background-position: center;
+      background: linear-gradient(to bottom, #1e1e1e, #3c3c3c);
       color: #ffffff;
       text-align: center;
     }
@@ -35,6 +35,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.2rem;
     }
     .online-text {
       color: green;
@@ -69,32 +70,56 @@
       border: 1px solid #ffffff;
       text-align: left;
     }
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .panel-title img {
+      height: 1.5rem;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="title">Status</div>
-  <div class="subtitle">Current Status Of Our Bots,Panel,Website</div>
+  <div class="title">OauthHosting</div>
+  <div class="subtitle">Free OAuth Bot Hosting</div>
 
   <div class="card">
-    <div class="panel">Panel</div>
-    <div class="online"><div class="circle"></div><div class="online-text">Online</div></div>
+    <div class="panel-title">
+      <img src="panel.jpg" alt="Panel Icon"> Panel
+    </div>
+    <div class="online">
+      <div class="circle green-circle"></div>
+      <div class="online-text">Online</div>
+    </div>
     <div class="percentage"></div>
   </div>
 
   <div class="card">
-    <div class="panel">Website</div>
-    <div class="online"><div class="circle"></div><div class="online-text">Online</div></div>
+    <div class="panel-title">
+      <img src="website.jpg" alt="Website Icon"> Website
+    </div>
+    <div class="online">
+      <div class="circle green-circle"></div>
+      <div class="online-text">Online</div>
+    </div>
     <div class="percentage"></div>
   </div>
 
   <div class="card">
-    <div class="panel">Bots</div>
-    <div class="online"><div class="circle"></div><div class="online-text">Online</div></div>
+    <div class="panel-title">
+      <img src="bots.jpg" alt="Bots Icon"> Bots
+    </div>
+    <div class="online">
+      <div class="circle green-circle"></div>
+      <div class="online-text">Online</div>
+    </div>
     <div class="percentage"></div>
   </div>
 
   <div class="card">
-    <div class="panel">Errors</div>
+    <div class="panel-title">Errors</div>
     <div class="error-list">
     </div>
   </div>
@@ -143,7 +168,7 @@
 
       const errorDiv = document.createElement('div');
       errorDiv.classList.add('error');
-      errorDiv.innerHTML = `[+] ${randomErrorType} disconnected`;
+      errorDiv.innerHTML = `[+] ${randomErrorType} Disconnected`;
       if (errorList.children.length >= 5) {
         errorList.removeChild(errorList.firstChild);
       }
