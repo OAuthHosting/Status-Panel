@@ -15,12 +15,25 @@
       color: #ffffff;
       text-align: center;
     }
+    .card {
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 80%;
+      background: transparent;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
     .title {
       font-size: 2rem;
       margin-top: 20%;
     }
     .subtitle {
       font-size: 0.8rem;
+    }
+    .online {
+      color: green;
+      font-weight: bold;
     }
     @media (max-width: 768px) {
       .title {
@@ -33,5 +46,18 @@
 <body>
   <div class="title">Status</div>
   <div class="subtitle">OauthHost - Status Panel</div>
+
+  <div class="card">
+    <div class="panel">Panel</div>
+    <div class="online">Online</div>
+    <div class="percentage">97-100%</div>
+  </div>
+
+  <script>
+    setInterval(function(){
+      var randomPercentage = Math.floor(Math.random() * 4) + 97;
+      document.querySelector('.percentage').textContent = randomPercentage + "%";
+    }, 5000);
+  </script>
 </body>
 </html>
