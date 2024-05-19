@@ -103,7 +103,7 @@
       var randomErrorType = Math.random() < 0.33 ? 'Panel' : Math.random() < 0.5 ? 'Website' : 'Bots';
       var randomDelay = Math.floor(Math.random() * (10000 - 5000) + 5000);
       errorDiv.classList.add('error');
-      errorDiv.textContent = "[+] " + randomErrorType + " disconnect";
+      errorDiv.textContent = "[+] " + randomErrorType + " disconnected";
       if (errorList.children.length >= 5) {
         errorList.removeChild(errorList.firstChild);
       }
