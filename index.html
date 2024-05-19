@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oauth•Status•Panel</title>
+  <title>Status</title>
   <style>
     body {
       margin: 0;
@@ -100,18 +100,22 @@
     setInterval(function(){
       var errorList = document.querySelector('.error-list');
       var errorDiv = document.createElement('div');
+      var randomErrorType = Math.random() < 0.33 ? 'Panel' : Math.random() < 0.5 ? 'Website' : 'Bots';
       var randomDelay = Math.floor(Math.random() * (10000 - 5000) + 5000);
       errorDiv.classList.add('error');
-      errorDiv.textContent = "[+] Common website error";
+      errorDiv.textContent = "[+] " + randomErrorType + " disconnect";
       if (errorList.children.length >= 5) {
         errorList.removeChild(errorList.firstChild);
       }
       errorList.appendChild(errorDiv);
       setTimeout(function(){
-        errorDiv.textContent = "[+] Solved";
+        errorDiv.textContent = "[+] Solved!";
+        var timeTaken = Math.floor((Date.now() - startTime) / 1000);
+        errorDiv.insertAdjacentHTML('beforeend', "<br>[+] Time taken: " + timeTaken + "s");
         errorDiv.classList.remove('error');
         errorDiv.classList.add('solved');
       }, randomDelay);
+      var startTime = Date.now();
     }, 15000);
   </script>
 </body>
