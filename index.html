@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Status</title>
+  <title>OauthHost-Status</title>
   <style>
     body {
       margin: 0;
@@ -21,7 +21,7 @@
       padding: 20px;
       margin: 20px auto;
       max-width: 80%;
-      background: transparent;
+      background: rgba(0, 0, 0, 0.6);
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
     .title {
@@ -32,8 +32,20 @@
       font-size: 0.8rem;
     }
     .online {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .online-text {
       color: green;
       font-weight: bold;
+    }
+    .circle {
+      width: 10px;
+      height: 10px;
+      background-color: green;
+      border-radius: 50%;
+      margin-right: 5px;
     }
     .error {
       color: red;
@@ -50,28 +62,34 @@
     .error-list {
       max-height: 200px;
       overflow-y: auto;
+      background-color: black;
+      color: white;
+      font-family: monospace;
+      padding: 10px;
+      border: 1px solid #ffffff;
+      text-align: left;
     }
   </style>
 </head>
 <body>
   <div class="title">Status</div>
-  <div class="subtitle">OauthHost - Status Panel</div>
+  <div class="subtitle">Current Status Of Our Bots,Panel,Website</div>
 
   <div class="card">
-    <div class="panel">Panels</div>
-    <div class="online">🟢•Online</div>
+    <div class="panel">Panel</div>
+    <div class="online"><div class="circle"></div><div class="online-text">Online</div></div>
     <div class="percentage"></div>
   </div>
 
   <div class="card">
     <div class="panel">Website</div>
-    <div class="online">🟢•Online</div>
+    <div class="online"><div class="circle"></div><div class="online-text">Online</div></div>
     <div class="percentage"></div>
   </div>
 
   <div class="card">
     <div class="panel">Bots</div>
-    <div class="online">🟢•Online</div>
+    <div class="online"><div class="circle"></div><div class="online-text">Online</div></div>
     <div class="percentage"></div>
   </div>
 
@@ -97,26 +115,51 @@
       });
     }, 10000);
 
+    function loadErrors() {
+      const errorList = document.querySelector('.error-list');
+      const errors = JSON.parse(localStorage.getItem('errors')) || [];
+      errors.forEach(error => {
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add(error.type === 'error' ? 'error' : 'solved');
+        errorDiv.innerHTML = error.message;
+        errorList.appendChild(errorDiv);
+      });
+    }
+
+    function saveError(error) {
+      const errors = JSON.parse(localStorage.getItem('errors')) || [];
+      if (errors.length >= 5) {
+        errors.shift();
+      }
+      errors.push(error);
+      localStorage.setItem('errors', JSON.stringify(errors));
+    }
+
     setInterval(function(){
-      var errorList = document.querySelector('.error-list');
-      var errorDiv = document.createElement('div');
-      var randomErrorType = Math.random() < 0.33 ? 'Panel' : Math.random() < 0.5 ? 'Website' : 'Bots';
-      var randomDelay = Math.floor(Math.random() * (10000 - 5000) + 5000);
+      const errorList = document.querySelector('.error-list');
+      const randomErrorType = Math.random() < 0.33 ? 'Panel' : Math.random() < 0.5 ? 'Website' : 'Bots';
+      const randomDelay = Math.floor(Math.random() * (10000 - 5000) + 5000);
+      const startTime = Date.now();
+
+      const errorDiv = document.createElement('div');
       errorDiv.classList.add('error');
-      errorDiv.textContent = "[+] " + randomErrorType + " disconnected";
+      errorDiv.innerHTML = `[+] ${randomErrorType} disconnected`;
       if (errorList.children.length >= 5) {
         errorList.removeChild(errorList.firstChild);
       }
       errorList.appendChild(errorDiv);
+      saveError({ message: errorDiv.innerHTML, type: 'error' });
+
       setTimeout(function(){
-        errorDiv.textContent = "[+] Solved " + randomErrorType;
-        var timeTaken = Math.floor((Date.now() - startTime) / 1000);
-        errorDiv.insertAdjacentHTML('beforeend', "<br>[+] Time taken: " + timeTaken + "s");
+        const timeTaken = Math.floor((Date.now() - startTime) / 1000);
         errorDiv.classList.remove('error');
         errorDiv.classList.add('solved');
+        errorDiv.innerHTML = `[+] Connected ${randomErrorType}<br>[+] Time taken: ${timeTaken}s`;
+        saveError({ message: errorDiv.innerHTML, type: 'solved' });
       }, randomDelay);
-      var startTime = Date.now();
     }, 15000);
+
+    loadErrors();
   </script>
 </body>
 </html>
