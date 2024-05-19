@@ -48,7 +48,19 @@
   <div class="subtitle">OauthHost - Status Panel</div>
 
   <div class="card">
-    <div class="panel">Panel</div>
+    <div class="panel">Host - Status</div>
+    <div class="online">Online</div>
+    <div class="percentage">90.00%</div>
+  </div>
+
+  <div class="card">
+    <div class="panel">Website</div>
+    <div class="online">Online</div>
+    <div class="percentage">90.00%</div>
+  </div>
+
+  <div class="card">
+    <div class="panel">Bots</div>
     <div class="online">Online</div>
     <div class="percentage">90.00%</div>
   </div>
@@ -56,7 +68,9 @@
   <script>
     setInterval(function(){
       var randomPercentage = (Math.random() * (100 - 90) + 90).toFixed(2);
-      document.querySelector('.percentage').textContent = randomPercentage + "%";
+      document.querySelectorAll('.percentage').forEach(function(el) {
+        el.textContent = randomPercentage + "%";
+      });
     }, 10000);
   </script>
 </body>
