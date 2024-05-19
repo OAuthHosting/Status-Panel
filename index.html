@@ -58,7 +58,7 @@
   <div class="subtitle">OauthHost - Status Panel</div>
 
   <div class="card">
-    <div class="panel">Panel</div>
+    <div class="panel">Host - Status</div>
     <div class="online">Online</div>
     <div class="percentage"></div>
   </div>
@@ -109,7 +109,7 @@
       }
       errorList.appendChild(errorDiv);
       setTimeout(function(){
-        errorDiv.textContent = "[+] Solved!";
+        errorDiv.textContent = "[+] Solved " + randomErrorType;
         var timeTaken = Math.floor((Date.now() - startTime) / 1000);
         errorDiv.insertAdjacentHTML('beforeend', "<br>[+] Time taken: " + timeTaken + "s");
         errorDiv.classList.remove('error');
